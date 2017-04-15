@@ -1,0 +1,11 @@
+name: Easter
+description: Easter Weekend Event
+author: StarTux
+version: 0.1
+main: com.winthier.easter.EasterPlugin
+depend: [ Custom ]
+commands:
+  easter:
+    description: Admin interface
+    permission: easter.easter
+    usage: /<command>
