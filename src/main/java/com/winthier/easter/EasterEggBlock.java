@@ -21,12 +21,12 @@ public final class EasterEggBlock extends EasterBlock {
 
     @Override @EventHandler(ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event, BlockContext context) {
-        plugin.getEasterBlocks().remove(context.getBlock());
         CustomPlugin.getInstance().getBlockManager().removeBlockWatcher(context.getBlockWatcher());
         plugin.wrapDroppedItem(context.getBlock());
         if (plugin.isEasterWorld(context.getBlock().getWorld())) {
             plugin.spawnNewBlock(context.getBlock());
             plugin.playJingle(context.getBlock().getLocation());
         }
+        plugin.getEasterBlocks().remove(context.getBlock());
     }
 }

@@ -25,7 +25,6 @@ public final class EasterBasketBlock extends EasterBlock {
 
     @Override @EventHandler(ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event, BlockContext context) {
-        plugin.getEasterBlocks().remove(context.getBlock());
         CustomPlugin.getInstance().getBlockManager().removeBlockWatcher(context.getBlockWatcher());
         event.setCancelled(true);
         context.getBlock().setType(Material.AIR);
@@ -68,5 +67,6 @@ public final class EasterBasketBlock extends EasterBlock {
                 break;
             }
         }
+        plugin.getEasterBlocks().remove(context.getBlock());
     }
 }

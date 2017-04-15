@@ -227,7 +227,7 @@ public final class EasterPlugin extends JavaPlugin implements Listener {
     }
 
     void spawnNewBlock(Block old) {
-        for (int i = 0; i < 16; i += 1) {
+        for (int i = 0; i < 5; i += 1) {
             final int r = 32;
             int x = old.getX() + random.nextInt(r + r) - r;
             int z = old.getZ() + random.nextInt(r + r) - r;

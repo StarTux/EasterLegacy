@@ -107,11 +107,11 @@ items:
   Description: 10 Pressure Bombs
 - Name: CustomTNT
   Commands:
-  - custom give %player% tnt:fragmentation_bomb
+  - custom give %player% tnt:fragmentation_bomb 10
   Description: 10 Fragmentation Bombs
 - Name: CustomTNT
   Commands:
-  - custom give %player% tnt:incendiary_bomb
+  - custom give %player% tnt:incendiary_bomb 10
   Description: 10 Incendiary Bombs
 - Name: Diamonds
   Commands:
