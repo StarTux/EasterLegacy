@@ -84,6 +84,7 @@ abstract class EasterBlock implements CustomBlock, TickableBlock, UnbreakableBlo
 
     @Override
     public void onTick(BlockWatcher watcher) {
+        if (!plugin.isEasterWorld(watcher.getBlock().getWorld())) return;
         ((Watcher)watcher).onTick();
     }
 
