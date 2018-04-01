@@ -1,5 +1,6 @@
 package com.winthier.easter;
 
+import com.winthier.custom.CustomPlugin;
 import com.winthier.custom.block.BlockContext;
 import com.winthier.custom.block.BlockWatcher;
 import com.winthier.custom.block.CustomBlock;
@@ -61,7 +62,7 @@ abstract class EasterBlock implements CustomBlock, TickableBlock, UnbreakableBlo
                 break;
             default: return;
             }
-            Msg.consoleCommand("minecraft:execute %s ~ ~ ~ minecraft:setblock %d %d %d minecraft:skull 1 replace {SkullType:3,Rot:%d,Owner:{Id:%s,Name:%s,Properties:{textures:[{Value:%s}]}}}",
+            Msg.consoleCommand("minecraft:execute %s ~ ~ ~ minecraft:setblock %d %d %d minecraft:skull 1 replace {SkullType:3,Rot:%d,Owner:{Id:%s,Name:\"%s\",Properties:{textures:[{Value:\"%s\"}]}}}",
                                sender.getUniqueId(),
                                block.getX(), block.getY(), block.getZ(), rotation,
                                head.getId(), head.getName(), head.getTexture());
@@ -84,8 +85,22 @@ abstract class EasterBlock implements CustomBlock, TickableBlock, UnbreakableBlo
 
     @Override
     public void onTick(BlockWatcher watcher) {
-        if (!plugin.isEasterWorld(watcher.getBlock().getWorld())) return;
-        ((Watcher)watcher).onTick();
+        if (watcher.getBlock().getType() != Material.SKULL) {
+            CustomPlugin.getInstance().getBlockManager().removeBlockWatcher(watcher);
+            return;
+        }
+        if (getType() == Type.EGG) {
+            // Eggs are now legacy and are simply removed.
+            CustomPlugin.getInstance().getBlockManager().removeBlockWatcher(watcher);
+        } else {
+            if (!plugin.easterEnabled) {
+                CustomPlugin.getInstance().getBlockManager().removeBlockWatcher(watcher);
+                watcher.getBlock().setType(Material.AIR);
+            } else {
+                if (!plugin.isEasterWorld(watcher.getBlock().getWorld())) return;
+                ((Watcher)watcher).onTick();
+            }
+        }
     }
 
     @Getter @RequiredArgsConstructor
@@ -95,8 +110,8 @@ abstract class EasterBlock implements CustomBlock, TickableBlock, UnbreakableBlo
         private int ticks;
 
         void onTick() {
+            plugin.getEasterBlocks().add(block);
             if (ticks == 0) {
-                plugin.getEasterBlocks().add(block);
                 ticks = plugin.getRandom().nextInt(20 * 10);
                 block.getWorld().playSound(block.getLocation().add(0.5, 0.5, 0.5), Sound.ENTITY_RABBIT_HURT, SoundCategory.BLOCKS, 2.0f, 0.1f);
             } else {

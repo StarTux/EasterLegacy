@@ -26,6 +26,19 @@ final class RewardItem {
         return new RewardItem(plugin, name, description, commands, itemStack);
     }
 
+    void give(Player player) {
+        plugin.getLogger().info("Giving reward '" + name + "' to " + player.getName() + "...");
+        Msg.send(player, "&aEaster Surprise! You win: &a%s", description);
+        if (commands != null) {
+            for (String string: commands) {
+                Msg.consoleCommand(string.replace("%player%", player.getName()));
+            }
+        }
+        if (itemStack != null) {
+            player.getWorld().dropItem(player.getEyeLocation(), itemStack.clone()).setPickupDelay(0);
+        }
+    }
+
     void give(Player player, int score) {
         plugin.getLogger().info("Giving reward '" + name + "' to " + player.getName() + "...");
         Msg.send(player, "&a%d&r Easter Eggs! You win: &a%s", score, description);
