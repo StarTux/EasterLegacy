@@ -381,7 +381,7 @@ public final class EasterPlugin extends JavaPlugin implements Listener {
         if (rand < 5) {
             giveRandomReward(player);
         } else if (rand < 50) {
-            switch (getRandom().nextInt(50)) {
+            switch (getRandom().nextInt(39)) {
             case 0: for (int i = 0; i < 3; i += 1) loc.getWorld().spawnEntity(loc, EntityType.CREEPER); break;
             case 1: for (int i = 0; i < 3; i += 1) loc.getWorld().spawnEntity(loc, EntityType.ZOMBIE); break;
             case 2: for (int i = 0; i < 3; i += 1) loc.getWorld().spawnEntity(loc, EntityType.HUSK); break;
