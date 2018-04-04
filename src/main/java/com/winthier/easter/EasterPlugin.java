@@ -69,6 +69,8 @@ public final class EasterPlugin extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
+        reloadConfig();
+        saveDefaultConfig();
         getServer().getPluginManager().registerEvents(this, this);
         new BukkitRunnable() {
             @Override public void run() {
