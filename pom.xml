@@ -5,7 +5,7 @@
   <artifactId>easter</artifactId>
   <packaging>jar</packaging>
   <version>0.1</version>
-  <name>HideSeek</name>
+  <name>Easter</name>
   <url>http://www.winthier.com</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
